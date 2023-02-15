@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { treeData } from "@/utils/data";
-import { Tree } from "@/components/Tree";
+import { TreeComponent } from "@/components/Tree";
 import { Layout } from "@/components/Layout";
 
 export default function () {
@@ -8,7 +8,6 @@ export default function () {
     "0-0-0",
     "0-0-1",
   ]);
-  const [checkedKeys, setCheckedKeys] = useState<React.Key[]>(["0-0-0"]);
   const [selectedKeys, setSelectedKeys] = useState<React.Key[]>([]);
   const [autoExpandParent, setAutoExpandParent] = useState<boolean>(true);
 
@@ -20,11 +19,6 @@ export default function () {
     setAutoExpandParent(false);
   };
 
-  const onCheck = (checkedKeysValue: React.Key[]) => {
-    console.log("onCheck", checkedKeysValue);
-    setCheckedKeys(checkedKeysValue);
-  };
-
   const onSelect = (selectedKeysValue: React.Key[], info: any) => {
     console.log("onSelect", info);
     setSelectedKeys(selectedKeysValue);
@@ -33,16 +27,13 @@ export default function () {
   return (
     <Layout>
       <p className="mb-24 text-3xl text-center ">Tree Component</p>
-      <Tree
-        // checkable
+      <TreeComponent
+        treeData={treeData}
+        autoExpandParent={autoExpandParent}
         // onExpand={onExpand}
         // expandedKeys={expandedKeys}
-        // autoExpandParent={autoExpandParent}
-        // onCheck={onCheck}
-        // checkedKeys={checkedKeys}
         // onSelect={onSelect}
         // selectedKeys={selectedKeys}
-        treeData={treeData}
       />
     </Layout>
   );

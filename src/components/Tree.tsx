@@ -3,32 +3,47 @@ export interface TreeNode {
   [key: string]: any; // type for unknown keys.
   children?: TreeNode[]; // type for a known property.
 }
+interface TreeNodeProps extends TreeNode {
+  autoExpandParent?: boolean;
+}
 
 export interface TreeComponentTypes {
-  // checkable: boolean;
+  treeData: TreeNode[];
+  autoExpandParent?: boolean;
   // expandedKeys: React.Key[];
   // onExpand: (e: React.Key[]) => void;
-  // autoExpandParent: boolean;
-  // onCheck: (e: React.Key[]) => void;
   // checkedKeys: React.Key[];
   // onSelect: (e: React.Key[], i: any) => void;
   // selectedKeys: React.Key[];
-  treeData: TreeNode[];
 }
-
-export const Tree = (props: TreeComponentTypes) => {
+export const TreeComponent = (props: TreeComponentTypes) => {
+  return (
+    <div>
+      <Tree treeData={props.treeData} autoExpandParent={true} />
+    </div>
+  );
+};
+export const Tree = (props: {
+  treeData: TreeNode[];
+  autoExpandParent?: boolean;
+}) => {
   const { treeData } = props;
   return (
     <ul className="d-flex d-tree-container flex-column">
       {treeData.map((tree) => (
-        <TreeNode node={tree} />
+        <TreeNode
+          key={tree.key}
+          node={tree}
+          autoExpandParent={props.autoExpandParent}
+        />
       ))}
     </ul>
   );
 };
 
-const TreeNode = ({ node }: TreeNode) => {
-  const [childVisible, setChildVisibility] = useState(false);
+const TreeNode = (props: TreeNodeProps) => {
+  const { node } = props;
+  const [childVisible, setChildVisibility] = useState(props.autoExpandParent);
 
   const hasChild = node.children ? true : false;
 
@@ -48,7 +63,10 @@ const TreeNode = ({ node }: TreeNode) => {
 
       {hasChild && childVisible && (
         <ul className="ml-4">
-          <Tree treeData={node.children} />
+          <Tree
+            treeData={node.children}
+            autoExpandParent={props.autoExpandParent}
+          />
         </ul>
       )}
     </li>
