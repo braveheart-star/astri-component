@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { treeData } from "@/utils/data";
 import { Tree } from "@/components/Tree";
+import { Layout } from "@/components/Layout";
 
 export default function () {
   const [expandedKeys, setExpandedKeys] = useState<React.Key[]>([
@@ -30,7 +31,8 @@ export default function () {
   };
 
   return (
-    <div className="container h-full p-4 m-auto mt-8 border border-green-400">
+    <Layout>
+      <p className="mb-8 text-2xl text-center">Tree Component</p>
       <Tree
         // checkable
         // onExpand={onExpand}
@@ -42,6 +44,6 @@ export default function () {
         // selectedKeys={selectedKeys}
         treeData={treeData}
       />
-    </div>
+    </Layout>
   );
 }
