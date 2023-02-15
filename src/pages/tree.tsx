@@ -32,7 +32,7 @@ export default function () {
 
   return (
     <Layout>
-      <p className="mb-8 text-2xl text-center">Tree Component</p>
+      <p className="mb-24 text-3xl text-center ">Tree Component</p>
       <Tree
         // checkable
         // onExpand={onExpand}
