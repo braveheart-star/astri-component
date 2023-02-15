@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { treeData } from "@/utils/data";
-import { TreeComponent } from "@/components/Tree";
+import { Tree } from "@/components/Tree";
 import { Layout } from "@/components/Layout";
 
 export default function () {
@@ -27,10 +27,10 @@ export default function () {
   return (
     <Layout>
       <p className="mb-24 text-3xl text-center ">Tree Component</p>
-      <TreeComponent
+      <Tree
         treeData={treeData}
         autoExpandParent={autoExpandParent}
-        // onExpand={onExpand}
+        onExpand={onExpand}
         // expandedKeys={expandedKeys}
         // onSelect={onSelect}
         // selectedKeys={selectedKeys}

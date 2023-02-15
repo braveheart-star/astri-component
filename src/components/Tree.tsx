@@ -5,38 +5,32 @@ export interface TreeNode {
 }
 interface TreeNodeProps extends TreeNode {
   autoExpandParent?: boolean;
+  onExpand?: (e: React.Key[]) => void;
 }
 
 export interface TreeComponentTypes {
   treeData: TreeNode[];
   autoExpandParent?: boolean;
+  onExpand?: (e: React.Key[]) => void;
   // expandedKeys: React.Key[];
-  // onExpand: (e: React.Key[]) => void;
   // checkedKeys: React.Key[];
   // onSelect: (e: React.Key[], i: any) => void;
   // selectedKeys: React.Key[];
 }
-export const TreeComponent = (props: TreeComponentTypes) => {
-  return (
-    <div>
-      <Tree treeData={props.treeData} autoExpandParent={true} />
-    </div>
-  );
-};
-export const Tree = (props: {
-  treeData: TreeNode[];
-  autoExpandParent?: boolean;
-}) => {
+
+export const Tree = (props: TreeComponentTypes) => {
   const { treeData } = props;
   return (
     <ul className="d-flex d-tree-container flex-column">
-      {treeData.map((tree) => (
-        <TreeNode
-          key={tree.key}
-          node={tree}
-          autoExpandParent={props.autoExpandParent}
-        />
-      ))}
+      {treeData &&
+        treeData.map((tree) => (
+          <TreeNode
+            key={tree.key}
+            node={tree}
+            onExpand={props.onExpand}
+            autoExpandParent={props.autoExpandParent}
+          />
+        ))}
     </ul>
   );
 };
