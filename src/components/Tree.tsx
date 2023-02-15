@@ -28,15 +28,20 @@ export const Tree = (props: TreeComponentTypes) => {
 };
 
 const TreeNode = ({ node }: TreeNode) => {
-  const [childVisible, setChildVisibility] = useState(true);
+  const [childVisible, setChildVisibility] = useState(false);
 
   const hasChild = node.children ? true : false;
 
   return (
-    <li>
-      <div className="flex" onClick={(e) => setChildVisibility((v) => !v)}>
-        <div className="w-4">
-          {hasChild && <i className="ri-arrow-right-s-fill"></i>}
+    <li className="mt-2">
+      <div className="flex">
+        <div className={`w-5 ${childVisible ? "rotate-90 " : "rotate-0"}`}>
+          {hasChild && (
+            <i
+              className="cursor-pointer ri-arrow-right-s-fill"
+              onClick={(e) => setChildVisibility((v) => !v)}
+            ></i>
+          )}
         </div>
         {node.title}
       </div>
