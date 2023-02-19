@@ -10,26 +10,16 @@ const dotColor: any = {
 };
 
 export const TimeLine = (props: TimeLineProps) => {
-  console.log("props: ", props);
-
   const TimeNode = (props: any) => {
     const { children, color, index, lastItem } = props;
     return (
-      <div className="flex w-full ">
-        <div className="relative flex">
+      <div className="w-full ">
+        <div className="relative w-full">
           {!lastItem && (
-            <div
-              className="absolute flex items-center justify-center w-2 h-full top-1 "
-              style={{ left: "0.25rem" }}
-            >
-              <div
-                className="h-full bg-gray-200 pointer-events-none "
-                style={{ width: "2px" }}
-              />
-            </div>
+            <div className="absolute flex items-center justify-center w-2 h-full top-1 timeline-axis"></div>
           )}
           {props.dot === "clock" ? (
-            <div className="absolute z-10 flex-shrink-0 w-4 h-4 overflow-hidden text-blue-600 bg-white fill-current top-1">
+            <div className="absolute z-10 flex-shrink-0 w-4 h-4 overflow-hidden text-blue-600 bg-white fill-current top-1 timeline-dot">
               <svg
                 className="w-full h-full"
                 xmlns="http://www.w3.org/2000/svg"
@@ -43,15 +33,17 @@ export const TimeLine = (props: TimeLineProps) => {
             </div>
           ) : (
             <div
-              className={`absolute flex-shrink-0 w-4 h-4 bg-white  border-4 rounded-full top-1  ${
+              className={`absolute flex-shrink-0 w-4 h-4 bg-white  border-4 rounded-full top-1 timeline-dot ${
                 color ? dotColor[color] : "border-gray-400"
               }`}
             />
           )}
-          <div className="flex-grow max-w-lg pb-8 ml-8 ">
-            <h2 className="text-sm font-medium tracking-wider text-gray-600 ">
-              {children}
-            </h2>
+          <div
+            className={`relative flex-grow pb-8 timeline-item-content ${
+              index % 2 === 0 ? "timeline-right-item" : "timeline-left-item"
+            }`}
+          >
+            <p className="text-sm tracking-wider ">{children}</p>
           </div>
         </div>
       </div>
