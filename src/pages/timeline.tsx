@@ -5,7 +5,7 @@ import { timeLineData } from "@/utils/data";
 import Example from "@/components/Example";
 import Link from "next/link";
 
-export default function () {
+export default function TimeLinePage() {
   return (
     <Layout>
       <div className="flex space-x-4 ">

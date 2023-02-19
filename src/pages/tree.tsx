@@ -5,7 +5,7 @@ import { Layout } from "@/components/Layout";
 import Example from "@/components/Example";
 import Link from "next/link";
 
-export default function () {
+export default function TreePage() {
   const [expandedKeys, setExpandedKeys] = useState<React.Key[]>([
     "0-0-0",
     "0-0-1",
