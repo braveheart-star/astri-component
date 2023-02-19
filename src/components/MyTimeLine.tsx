@@ -16,10 +16,24 @@ export const TimeLine = (props: TimeLineProps) => {
       <div className="w-full ">
         <div className="relative w-full">
           {!lastItem && (
-            <div className="absolute flex items-center justify-center w-2 h-full top-1 timeline-axis"></div>
+            <div
+              className={`absolute flex items-center justify-center w-2 h-full top-1 
+            ${
+              props.mode === "alternate"
+                ? "timeline-alternate-axis"
+                : "timeline-axis"
+            }
+            `}
+            ></div>
           )}
           {props.dot === "clock" ? (
-            <div className="absolute z-10 flex-shrink-0 w-4 h-4 overflow-hidden text-blue-600 bg-white fill-current top-1 timeline-dot">
+            <div
+              className={`absolute z-10 flex-shrink-0 w-4 h-4 overflow-hidden text-blue-600 bg-white fill-current top-1 timeline-dot ${
+                props.mode === "alternate"
+                  ? "timeline-item-alternate-dot"
+                  : "timeline-dot"
+              }`}
+            >
               <svg
                 className="w-full h-full"
                 xmlns="http://www.w3.org/2000/svg"
@@ -33,14 +47,24 @@ export const TimeLine = (props: TimeLineProps) => {
             </div>
           ) : (
             <div
-              className={`absolute flex-shrink-0 w-4 h-4 bg-white  border-4 rounded-full top-1 timeline-dot ${
+              className={`absolute flex-shrink-0 w-4 h-4 bg-white  border-4 rounded-full top-1 ${
                 color ? dotColor[color] : "border-gray-400"
-              }`}
+              }
+              ${
+                props.mode === "alternate"
+                  ? "timeline-item-alternate-dot"
+                  : "timeline-dot"
+              }
+              `}
             />
           )}
           <div
             className={`relative flex-grow pb-8 timeline-item-content ${
-              index % 2 === 0 ? "timeline-right-item" : "timeline-left-item"
+              props.mode === "alternate"
+                ? index % 2 === 0
+                  ? "timeline-right-item"
+                  : "timeline-left-item"
+                : ""
             }`}
           >
             <p className="text-sm tracking-wider ">{children}</p>
@@ -55,8 +79,9 @@ export const TimeLine = (props: TimeLineProps) => {
         <TimeNode
           key={idx}
           index={idx}
-          {...item}
           lastItem={props.items.length === idx + 1}
+          mode="alternate"
+          {...item}
         />
       ))}
     </div>
