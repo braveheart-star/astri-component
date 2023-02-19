@@ -1,5 +1,5 @@
 interface TimeLineProps {
-  mode?: "left" | "alternate" | "right";
+  mode?: string;
   items: any;
   color?: string;
 }
@@ -80,7 +80,7 @@ export const TimeLine = (props: TimeLineProps) => {
           key={idx}
           index={idx}
           lastItem={props.items.length === idx + 1}
-          mode="alternate"
+          mode={props.mode}
           {...item}
         />
       ))}
