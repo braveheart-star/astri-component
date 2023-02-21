@@ -6,7 +6,7 @@ export default function Home() {
     <Layout>
       <div className="m-auto h-96">
         <h1 className="text-3xl font-bold text-center text-gray-500 ">
-          Atri Labs Test Project
+          Atri Labs Components
         </h1>
         <div className="flex flex-col mt-8 space-y-4 ">
           <div className="flex space-x-4 ">
